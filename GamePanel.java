@@ -73,86 +73,91 @@ public class GamePanel extends JPanel implements ActionListener { //Membuat clas
 	}
 
 	public void drawBoard(Graphics page) {
-		setBackground(turtle);
-		page.setColor(darkgray);
-		page.fillRoundRect(x, y, lineLength, lineWidth, 5, 30);
-		page.fillRoundRect(x, y + offset, lineLength, lineWidth, 5, 30);
-		page.fillRoundRect(y, x, lineWidth, lineLength, 30, 5);
-		page.fillRoundRect(y + offset, x, lineWidth, lineLength, 30, 5);
+		setBackground(turtle);//Mengatur warna latar belakang panel dengan warna yang telah diinisialisasi sebelumnya dengan Color turtle.
+		page.setColor(darkgray);//Mengatur warna untuk menggambar elemen-elemen papan permainan, dalam hal ini, warna garis menggunakan darkgray.
+		page.fillRoundRect(x, y, lineLength, lineWidth, 5, 30);//Menggambar kotak dengan sudut yang dibulatkan (rounded rectangle) sebagai dasar papan permainan. Parameter-parameter menyediakan koordinat dan ukuran kotak, serta radius sudut bulatan.
+		page.fillRoundRect(x, y + offset, lineLength, lineWidth, 5, 30);//Menggambar garis horizontal tengah papan permainan dengan parameter yang serupa.
+		page.fillRoundRect(y, x, lineWidth, lineLength, 30, 5);//Menggambar garis vertikal kiri papan permainan dengan parameter yang serupa.
+		page.fillRoundRect(y + offset, x, lineWidth, lineLength, 30, 5);//enggambar garis vertikal kanan papan permainan dengan parameter yang serupa.
 	}
 
 	public void drawUI(Graphics page) {
-		// SET COLOR AND FONT
-		page.setColor(darkgray);
-		page.fillRect(300, 0, 120, 300);
-		Font font = new Font("Helvetica", Font.PLAIN, 20);
-		page.setFont(font);
+		// SET COLOR AND FONT//metode buat set color dan font
+		page.setColor(darkgray);// Mengatur warna latar belakang
+		page.fillRect(300, 0, 120, 300); // Menggambar latar belakang untuk UI
+		Font font = new Font("Helvetica", Font.PLAIN, 20);// Membuat objek Font dengan jenis "Helvetica", style Font.PLAIN, dan ukuran
+		page.setFont(font);// Mengatur font untuk UI
 
 		// SET WIN COUNTER
-		page.setColor(offwhite);
-		page.drawString("Win Count", 310, 30);
-		page.drawString(": " + player1wins, 362, 70);
-		page.drawString(": " + player2wins, 362, 105);
+		page.setColor(offwhite); // Mengatur warna untuk teks hitungan kemenangan
+		page.drawString("Win Count", 310, 30);// Menggambar teks "Win Count"
+		page.drawString(": " + player1wins, 362, 70);// Menggambar jumlah kemenangan pemain X
+		page.drawString(": " + player2wins, 362, 105);// Menggambar jumlah kemenangan pemain O
 
 		// DRAW score X
-		ImageIcon xIcon = new ImageIcon("orangex.png");
-		Image xImg = xIcon.getImage();
-		Image newXImg = xImg.getScaledInstance(27, 27, java.awt.Image.SCALE_SMOOTH);
-		ImageIcon newXIcon = new ImageIcon(newXImg);
-		page.drawImage(newXIcon.getImage(), 44 + offset * 1 + 190, 47 + offset * 0, null);
+		ImageIcon xIcon = new ImageIcon("orangex.png");// Membuat objek ImageIcon dengan gambar "orangex.png"
+		Image xImg = xIcon.getImage();// Mengambil gambar dari ImageIco
+		Image newXImg = xImg.getScaledInstance(27, 27, java.awt.Image.SCALE_SMOOTH);/ Menyesuaikan ukuran gambar X
+		ImageIcon newXIcon = new ImageIcon(newXImg);// Membuat ImageIcon baru dengan gambar yang telah diubah ukurannya
+		page.drawImage(newXIcon.getImage(), 44 + offset * 1 + 190, 47 + offset * 0, null);// Menggambar simbol X
 
 		// DRAW score O
-		page.setColor(offwhite);
-		page.fillOval(43 + 190 + offset, 80, 30, 30);
-		page.setColor(darkgray);
-		page.fillOval(49 + 190 + offset, 85, 19, 19);
+		page.setColor(offwhite);// Mengatur warna untuk simbol O
+		page.fillOval(43 + 190 + offset, 80, 30, 30);// Menggambar lingkaran putih
+		page.setColor(darkgray);// Mengatur warna untuk lingkaran di atas lingkaran putih
+		page.fillOval(49 + 190 + offset, 85, 19, 19);// Menggambar lingkaran di atas lingkaran putih
 
 		// DRAW WHOS TURN or WINNER
-		page.setColor(offwhite);
-		Font font1 = new Font("Serif", Font.ITALIC, 18);
-		page.setFont(font1);
+		page.setColor(offwhite); // Mengatur warna untuk teks dan simbol pemenang/giliran
+		Font font1 = new Font("Serif", Font.ITALIC, 18);// Membuat objek Font untuk teks pemenang/giliran
+		page.setFont(font1);// Mengatur font untuk teks pemenang/giliran
 
 		if (gameDone) {
-			if (winner == 1) { // x
-				page.drawString("Pemenangnya", 310, 150);
-				page.drawImage(xImg, 335, 160, null);
+			if (winner == 1) { // x // Jika pemain X menang
+				page.drawString("Pemenangnya", 310, 150);// Jika permainan sudah selesai
+				page.drawImage(xImg, 335, 160, null); // Menggambar simbol X
 			} else if (winner == 2) { // o
-				page.drawString("Pemenangnya", 310, 150);
-				page.setColor(offwhite);
-				page.fillOval(332, 160, 50, 50);
-				page.setColor(darkgray);
-				page.fillOval(342, 170, 30, 30);
-			} else if (winner == 3) { // tie
-				page.drawString("Seri", 345, 160);
+				page.drawString("Pemenangnya", 310, 150);// Menampilkan teks "Pemenangnya"
+				page.setColor(offwhite);// Menggambar lingkaran putih
+				page.fillOval(332, 160, 50, 50);// Menggambar lingkaran ptuih
+				page.setColor(darkgray); // Jika permainan seri
+				page.fillOval(342, 170, 30, 30);// Menggambar lingkaran di atas lingkaran putih
+			} else if (winner == 3) { // tie  // Jika permainan seri
+				page.drawString("Seri", 345, 160);// Menampilkan teks "Seri"
 			}
-		} else {
-			Font font2 = new Font("Serif", Font.ITALIC, 20);
-			page.setFont(font2);
-			page.drawString("Sekarang", 327, 150);
+		} else {  // Jika permainan masih berlangsung
+			Font font2 = new Font("Serif", Font.ITALIC, 20); // Membuat objek Font untuk teks giliran
+			page.setFont(font2);  // Mengatur font untuk teks giliran
+			page.drawString("Sekarang", 327, 150); // Menampilkan teks "Sekarang"
 			if (playerX) {
-				page.drawString("Giliran X", 325, 170);
+				page.drawString("Giliran X", 325, 170);  // Menampilkan teks "Giliran X"
 			} else {
-				page.drawString("Giliran O", 325, 170);
+				page.drawString("Giliran O", 325, 170); // Menampilkan teks "Giliran O"
 			}
 		}
 		// DRAW LOGO
-		Image Wayang = Toolkit.getDefaultToolkit().getImage("wayang.png");
-		page.drawImage(Wayang, 335, 215, 60, 60, this);
-		Font c = new Font("Courier", Font.BOLD + Font.CENTER_BASELINE, 13);
-		page.setFont(c);
-		page.drawString("Selamat Bermain", 300, 280);
+		Image Wayang = Toolkit.getDefaultToolkit().getImage("wayang.png"); // Membuat objek gambar logo
+		page.drawImage(Wayang, 335, 215, 60, 60, this); // Menggambar logo
+		Font c = new Font("Courier", Font.BOLD + Font.CENTER_BASELINE, 13); // Membuat objek Font untuk teks selamat bermain
+		page.setFont(c); // Mengatur font untuk teks selamat bermain 
+		page.drawString("Selamat Bermain", 300, 280); // Menampilkan teks "Selamat Bermain"
 	}
 
 	public void drawGame(Graphics page) {
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
+		// Loop melalui setiap sel pada papan permainan
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 5; j++) {
+				// Jika nilai sel pada papan permainan adalah 0 (kosong), tidak ada gambar yang digambar
 				if (board[i][j] == 0) {
+					 // Kosong
 
-				} else if (board[i][j] == 1) {
+				} else if (board[i][j] == 1) { / Jika nilai sel adalah 1 (mewakili pemain X)
+                // Menggambar simbol X pada posisi tertentu
 					ImageIcon xIcon = new ImageIcon("orangex.png");
 					Image xImg = xIcon.getImage();
 					page.drawImage(xImg, 30 + offset * i, 30 + offset * j, null);
-				} else if (board[i][j] == 2) {
+				} else if (board[i][j] == 2) {   // Jika nilai sel adalah 2 (mewakili pemain O)
+                // Menggambar lingkaran putih dan kepala kura-kura pada posisi tertentu
 					page.setColor(offwhite);
 					page.fillOval(30 + offset * i, 30 + offset * j, 50, 50);
 					page.setColor(turtle);
