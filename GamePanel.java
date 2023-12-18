@@ -68,8 +68,8 @@ public class GamePanel extends JPanel implements ActionListener { //Membuat clas
 	public void paintComponent(Graphics page) { //Method dengan parameter Graphics bernama page yang otomatis diarahkan ke 'paintComponent' method. Objek ini menyediakan method yang diperlukan untuk menggambar bentuk, text, dan gambar pada komponen
 		super.paintComponent(page);	//untuk memastikan rendering yang tepat dan menghindari potensi masalah dengan mekanisme painting Swing.
 		drawBoard(page);			//Memanggil method drawBoard
-		drawUI(page);
-		drawGame(page);
+		drawUI(page);				//memanggil method drawui
+		drawGame(page);				//memanggil method drawgame
 	}
 
 	public void drawBoard(Graphics page) {
