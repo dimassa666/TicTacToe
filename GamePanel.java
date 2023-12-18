@@ -102,14 +102,22 @@ public class GamePanel extends JPanel implements ActionListener { //Membuat clas
 		Image xImg = xIcon.getImage();// Mengambil gambar dari ImageIco
 		Image newXImg = xImg.getScaledInstance(27, 27, java.awt.Image.SCALE_SMOOTH);// Menyesuaikan ukuran gambar X
 		ImageIcon newXIcon = new ImageIcon(newXImg);// Membuat ImageIcon baru dengan gambar yang telah diubah ukurannya
+<<<<<<< HEAD
 		page.drawImage(newXIcon.getImage(), 255 + offset * 1 + 190, 50 + offset * 0, null);// Menggambar simbol X dengan koordinat yang ditentukan
+=======
+		page.drawImage(newXIcon.getImage(), 44 + offset * 1 + 190, 47 + offset * 0, null);// Menggambar simbol X dengan koordinat yang ditentukan
+>>>>>>> f487b5c8746e7b569a3256dd01342264e4eaeb65
 
 		// DRAW score O
 		ImageIcon oIcon = new ImageIcon("orangeo.png"); 									//Membuat objek ImageIcon dengan gambar "orangeo.png"
 		Image oImg = oIcon.getImage();																//Mengambil gambar dari ImageIcon
 		Image newOIMG = oImg.getScaledInstance(27, 27, java.awt.Image.SCALE_SMOOTH);	//Menyesuaikan ukuran gambar o
 		ImageIcon newOIcon = new ImageIcon(newOIMG);												//Membuat ImageIcon baru dengan gambar yang telah diubah ukurannya
+<<<<<<< HEAD
 		page.drawImage(newOIcon.getImage(), 255 + offset * 1 + 190,85 + offset * 0, null);	//Menggambar simbol O dengan koordinat yang ditentukan
+=======
+		page.drawImage(newOIcon.getImage(), 44 + offset * 1 + 190,85 + offset * 0, null);	//Menggambar simbol O dengan koordinat yang ditentukan
+>>>>>>> f487b5c8746e7b569a3256dd01342264e4eaeb65
 		
 		// DRAW WHOS TURN or WINNER
 		page.setColor(offwhite); // Mengatur warna untuk teks dan simbol pemenang/giliran
@@ -152,6 +160,7 @@ public class GamePanel extends JPanel implements ActionListener { //Membuat clas
 
 				} else if (board[i][j] == 1) { // Jika nilai sel adalah 1 (mewakili pemain X)
                 // Menggambar simbol X pada posisi tertentu
+<<<<<<< HEAD
 					ImageIcon xIcon = new ImageIcon("orangex.png");  			    // Mengimport file dengan nama "orangex.png" dalam file
 					Image xImg = xIcon.getImage();											// Menjadikan image sebuah variable
 					page.drawImage(xImg, 30 + offset * i, 30 + offset * j, null);  // Menentukan koordinat X
@@ -159,6 +168,15 @@ public class GamePanel extends JPanel implements ActionListener { //Membuat clas
 					ImageIcon oIcon = new ImageIcon("orangeo.png");				// Mengimport file dengan nama "orangeo.png" dalam file
 					Image oImg = oIcon.getImage();											// Menjadikan image sebuah variable
 					page.drawImage(oImg, 30 + offset * i, 30 + offset * j, null);	// Menentukan koordinat digambarnya O
+=======
+					ImageIcon xIcon = new ImageIcon("orangex.png");
+					Image xImg = xIcon.getImage();
+					page.drawImage(xImg, 30 + offset * i, 30 + offset * j, null);
+				} else if (board[i][j] == 2) {   // Jika nilai sel adalah 2 (mewakili pemain O)
+					ImageIcon oIcon = new ImageIcon("orangeo.png");				//Mengimport file dengan nama "orangeo.png" dalam file
+					Image oImg = oIcon.getImage();											//Menjadikan image sebuah variable
+					page.drawImage(oImg, 30 + offset * i, 30 + offset * j, null);	//Menentukan koordinat digambarnya O
+>>>>>>> f487b5c8746e7b569a3256dd01342264e4eaeb65
 				}
 			}
 		}
