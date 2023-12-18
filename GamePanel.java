@@ -99,14 +99,15 @@ public class GamePanel extends JPanel implements ActionListener { //Membuat clas
 		Image xImg = xIcon.getImage();// Mengambil gambar dari ImageIco
 		Image newXImg = xImg.getScaledInstance(27, 27, java.awt.Image.SCALE_SMOOTH);// Menyesuaikan ukuran gambar X
 		ImageIcon newXIcon = new ImageIcon(newXImg);// Membuat ImageIcon baru dengan gambar yang telah diubah ukurannya
-		page.drawImage(newXIcon.getImage(), 44 + offset * 1 + 190, 47 + offset * 0, null);// Menggambar simbol X
+		page.drawImage(newXIcon.getImage(), 44 + offset * 1 + 190, 47 + offset * 0, null);// Menggambar simbol X dengan koordinat yang ditentukan
 
 		// DRAW score O
-		page.setColor(offwhite);// Mengatur warna untuk simbol O
-		page.fillOval(43 + 190 + offset, 80, 30, 30);// Menggambar lingkaran putih
-		page.setColor(darkgray);// Mengatur warna untuk lingkaran di atas lingkaran putih
-		page.fillOval(49 + 190 + offset, 85, 19, 19);// Menggambar lingkaran di atas lingkaran putih
-
+		ImageIcon oIcon = new ImageIcon("orangeo.png"); 									//Membuat objek ImageIcon dengan gambar "orangeo.png"
+		Image oImg = oIcon.getImage();																//Mengambil gambar dari ImageIcon
+		Image newOIMG = oImg.getScaledInstance(27, 27, java.awt.Image.SCALE_SMOOTH);	//Menyesuaikan ukuran gambar o
+		ImageIcon newOIcon = new ImageIcon(newOIMG);												//Membuat ImageIcon baru dengan gambar yang telah diubah ukurannya
+		page.drawImage(newOIcon.getImage(), 44 + offset * 1 + 190,85 + offset * 0, null);	//Menggambar simbol O dengan koordinat yang ditentukan
+		
 		// DRAW WHOS TURN or WINNER
 		page.setColor(offwhite); // Mengatur warna untuk teks dan simbol pemenang/giliran
 		Font font1 = new Font("Serif", Font.ITALIC, 18);// Membuat objek Font untuk teks pemenang/giliran
@@ -157,11 +158,9 @@ public class GamePanel extends JPanel implements ActionListener { //Membuat clas
 					Image xImg = xIcon.getImage();
 					page.drawImage(xImg, 30 + offset * i, 30 + offset * j, null);
 				} else if (board[i][j] == 2) {   // Jika nilai sel adalah 2 (mewakili pemain O)
-                // Menggambar lingkaran putih dan kepala kura-kura pada posisi tertentu
-					page.setColor(offwhite);
-					page.fillOval(30 + offset * i, 30 + offset * j, 50, 50);
-					page.setColor(turtle);
-					page.fillOval(40 + offset * i, 40 + offset * j, 30, 30);
+					ImageIcon oIcon = new ImageIcon("orangeo.png");				//Mengimport file dengan nama "orangeo.png" dalam file
+					Image oImg = oIcon.getImage();											//Menjadikan image sebuah variable
+					page.drawImage(oImg, 30 + offset * i, 30 + offset * j, null);	//Menentukan koordinat digambarnya O
 				}
 			}
 		}
