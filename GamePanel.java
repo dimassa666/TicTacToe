@@ -97,7 +97,7 @@ public class GamePanel extends JPanel implements ActionListener { //Membuat clas
 		// DRAW score X
 		ImageIcon xIcon = new ImageIcon("orangex.png");// Membuat objek ImageIcon dengan gambar "orangex.png"
 		Image xImg = xIcon.getImage();// Mengambil gambar dari ImageIco
-		Image newXImg = xImg.getScaledInstance(27, 27, java.awt.Image.SCALE_SMOOTH);/ Menyesuaikan ukuran gambar X
+		Image newXImg = xImg.getScaledInstance(27, 27, java.awt.Image.SCALE_SMOOTH);// Menyesuaikan ukuran gambar X
 		ImageIcon newXIcon = new ImageIcon(newXImg);// Membuat ImageIcon baru dengan gambar yang telah diubah ukurannya
 		page.drawImage(newXIcon.getImage(), 44 + offset * 1 + 190, 47 + offset * 0, null);// Menggambar simbol X
 
@@ -151,7 +151,7 @@ public class GamePanel extends JPanel implements ActionListener { //Membuat clas
 				if (board[i][j] == 0) {
 					 // Kosong
 
-				} else if (board[i][j] == 1) { / Jika nilai sel adalah 1 (mewakili pemain X)
+				} else if (board[i][j] == 1) { // Jika nilai sel adalah 1 (mewakili pemain X)
                 // Menggambar simbol X pada posisi tertentu
 					ImageIcon xIcon = new ImageIcon("orangex.png");
 					Image xImg = xIcon.getImage();
@@ -208,136 +208,143 @@ public class GamePanel extends JPanel implements ActionListener { //Membuat clas
 			}
 		
 			// Check for a tie
-			boolean notDone = false;
-			for (int i = 0; i < 5; i++) {
-				for (int j = 0; j < 5; j++) {
-					if (board[i][j] == 0) {
-						notDone = true;
-						break;
+			boolean notDone = false;			//membuat Varable boolean bernama notDone yang berisikan nilai false untuk mengindikasikan bahwa permainan belum selesai 
+			for (int i = 0; i < 5; i++) {		//melakukan looping untuk mengecek dari i=0 sampai i=4
+				for (int j = 0; j < 5; j++) {	//melakukan nested looping untuk mengecek dari j=0 sampai j=4
+					if (board[i][j] == 0) {		//melakukan pengecekan kondisi jika isi dari array i dan j sama dengan 0
+						notDone = true;			//maka notDone sama dengan true
+						break;					// break (keluar dari looping) 
 					}
 				}
 			}
 		
-			if (temp > 0) {
-				winner = temp;
-				if (winner == 1) {
-					player1wins++;
-					System.out.println("Winner is X");
-				} else if (winner == 2) {
-					player2wins++;
-					System.out.println("Winner is O");
-				} else if (winner == 3) {
-					System.out.println("It's a tie");
+			if (temp > 0) {									//mengecek apakah variable temp lebih dari 0
+				winner = temp;								//memberi isi variable winner sama dengan isi variable temp
+				if (winner == 1) {							//mengecek kondisi apakah variable winner sama dengan 1
+					player1wins++;							//jika sama dengan 1 maka melakukan increament pada variable player1wins
+					System.out.println("Winner is X");	//memberi output "Winner is X"
+				} else if (winner == 2) {					//mengecek kondisi lain apakah variable winner sama dengan 2
+					player2wins++;							//jika sama dengan 2 maka melakukan increament pada variable player2wins 
+					System.out.println("Winner is O");	//memberi output "Winner is O"
+				} else if (winner == 3) {					//mengecek kondisi lain apakah variable winner sama dengan 3
+					System.out.println("It's a tie");		//jika sama dengan 3 maka memberi output "It's a tie"
 				}
-				gameDone = true;
-				getJButton().setVisible(true);
-			} else if (!notDone) {
-				// All spots are filled, but no winner
-				winner = 3; // Tie
-				System.out.println("It's a tie");
-				gameDone = true;
-				getJButton().setVisible(true);
+				gameDone = true;							//memberi value true kepada variable gameDone
+				getJButton().setVisible(true);		//memperlihatkan variable button yang kita buat dengan cara mengubah value dari false menjadi true
+			} else if (!notDone) {							//mengecek kondisi lain jika variable notDOne tidak true
+				winner = 3;									//memberi variable winner dengan nilai 3
+				System.out.println("It's a tie");			//memberi output "It's a tie"
+				gameDone = true;							//memberi value variable gameDone menjadi true
+				getJButton().setVisible(true);		//memperlihatkan variable button yang kita buat dengan cara mengubah value dari false menjadi true
 			}
 		}
-	public JButton getJButton() {	return jButton; }
+	public JButton getJButton() {	return jButton; }		//membuat method Jbutton yang berfungsi untuk get variable jButton
 
-	public void setPlayerXWins(int a) {
-		player1wins = a;
+	public void setPlayerXWins(int a) {						//membuat method yang berfungsi untuk set playerXWins dengan parameter int a
+		player1wins = a;									//mengisi variable player1wins = a;
 	}
 
-	public void setPlayerOWins(int a) {
-		player2wins = a;
+	public void setPlayerOWins(int a) {						//membuat method yang berfungsi untuk set playerOwins dengan parameter int a
+		player2wins = a;									//mengisi variable player2wins = a;
 	}
 
-	public static void main(String[] args) {
-		JFrame frame = new JFrame("Tic Tac Toe");
-		frame.getContentPane();
+	public static void main(String[] args) {				//fungsi utama dalam program
+		JFrame frame = new JFrame("Tic Tac Toe");		//membuat frame baru 
+		frame.getContentPane();								
 
-		GamePanel gamePanel = new GamePanel();
-		frame.add(gamePanel);
+		GamePanel gamePanel = new GamePanel();				//membuat panel game baru
+		frame.add(gamePanel);								//memasukkan gamePanel ke dalam fram
 
-		frame.addWindowListener(new WindowAdapter() {
-			public void windowOpened(WindowEvent e) {
+		frame.addWindowListener(new WindowAdapter() {		//Memasukkan window listener ke dalam frame
+			public void windowOpened(WindowEvent e) {		//Method WindowOpened untuk membuka window baru
 				try {
-					File file = new File("score.txt");
-					Scanner sc = new Scanner(file);
-					gamePanel.setPlayerXWins(Integer.parseInt(sc.nextLine()));
-					gamePanel.setPlayerOWins(Integer.parseInt(sc.nextLine()));
-					sc.close();
-				} catch (IOException io) {
+					File file = new File("score.txt");					//Untuk membuat file bernama score.txt
+					Scanner sc = new Scanner(file);								//Membuat scanner untuk scan file dengan nama score.txt ^
+					gamePanel.setPlayerXWins(Integer.parseInt(sc.nextLine()));	//membaca satu baris dari file eksternal (score.txt) sebagai string menggunakan objek Scanner (sc), dan kemudian mengonversinya menjadi tipe data integer. (Untuk player X)
+					gamePanel.setPlayerOWins(Integer.parseInt(sc.nextLine()));  //membaca satu baris dari file eksternal (score.txt) sebagai string menggunakan objek Scanner (sc), dan kemudian mengonversinya menjadi tipe data integer. (Untuk player O)
+					sc.close();													//menutup scanner
+				} catch (IOException io) {										//Throw exception
 				}
 			}
 
-			public void windowClosing(WindowEvent e) {
-				try {
-					PrintWriter pw = new PrintWriter("score.txt");
-					pw.write("");
-					pw.write(gamePanel.player1wins + "\n");
-					pw.write(gamePanel.player2wins + "\n");
-					pw.close();
-				} catch (FileNotFoundException e1) { }
+			public void windowClosing(WindowEvent e) {						//Method untuk close window
+				try {		
+					PrintWriter pw = new PrintWriter("score.txt");	//Untuk print input baru ke dalam file score.txt
+					pw.write("");											//Write""""
+					pw.write(gamePanel.player1wins + "\n");					//Untuk write input dari aplikasi ke file
+					pw.write(gamePanel.player2wins + "\n");					//untuk write input dari aplikasi ke file
+					pw.close();												//untuk close writer
+				} catch (FileNotFoundException e1) { }						//Throw exception
 			}
 		});
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		frame.pack();
-		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);				//untuk set default operasi close
+		frame.setResizable(false);								//untuk set resizeable menjadi false agar window tidak bisa resize (fixed size)
+		frame.pack();														//untuk set window sesuai dengan ukuran yang diinginkan
+		frame.setVisible(true);											//untuk set visibilitas window menjadi true (Agar terlihat)
 	}
 
-	private class XOListener implements MouseListener {
+	private class XOListener implements MouseListener {		//class untuk mouselistener (pengecek koordinat)
 
-		public void mouseClicked(MouseEvent event) {
-			selX = -1;
-			selY = -1;
-			if (gameDone == false) {
-				a = event.getX();
-				b = event.getY();
-				int selX = 0, selY = 0;
-				if (a > 12 && a < 99) {
-					selX = 0;
-				} else if (a > 103 && a < 195) {
-					selX = 1;
-				} else if (a > 200 && a < 287) {
-					selX = 2;
-				} else {
-					selX = -1;
+		public void mouseClicked(MouseEvent event) {		//method untuk tracking mouse click
+			selX = -1;										//mengisi variable selX dengan nilai -1
+			selY = -1;										//mengisi variable selY dengan nilai -1
+			if (gameDone == false) {						//mengecek kondisi jika gameDOne sama dengan false
+				a = event.getX();							//mendeklarasikan variable a untuk mendapatkan koordinat X
+				b = event.getY();							//mendeklarasikan variable a untuk mendapatkan koordinat Y
+				int selX = 0, selY = 0;						//membuat variable baru selX dan selY dengan nilai sama sama 0
+				if (a > 12 && a < 99) {						//mengecek kondisi jika a lebih dari 12 dan a kurang dari 99 (koordinat)
+					selX = 0;								//mengisi nilai selX dengan 0
+				} else if (a > 103 && a < 195) {			//mengecek kondisi lain jika a lebih dari 103 dan a kurang dari 195 (koordinat)
+					selX = 1;								//mengisi nilai selX dengan 1
+				} else if (a > 200 && a < 287) {			//mengecek kondisi lain jika a lebih dari 200 dan a kurang dari 287 (koordinat)
+					selX = 2;								//mengisi nilai selX dengan 2
+				} else if (a > 291 && a < 383) {			//mengecek kondisi lain jika a lebih dari 291 dan a kurang dari 383 (koordinat)
+					selX = 3;								//mengisi nilai selX dengan 3
+				} else if (a > 382 && a < 479) {			//mengecek kondisi lain jika a lebih dari 382 dan a kurang dari 479 (koordinat)
+					selX = 4; 								//mengisi nilai selX dengan 4
+				}else {										//kondisi selain kondisi diatas
+					selX = -1;								//mengisi nilai selX dengan -1
 				}
 
-				if (b > 12 && b < 99) {
-					selY = 0;
-				} else if (b > 103 && b < 195) {
-					selY = 1;
-				} else if (b > 200 && b < 287) {
-					selY = 2;
+				if (b > 12 && b < 99) {						//mengecek kondisi jika b lebih dari 12 dan b kurang dari 99 (koordinat)
+					selY = 0;								//mengisi nilai selY dengan 0
+				} else if (b > 103 && b < 195) {			//mengecek kondisi jika b lebih dari 12 dan b kurang dari 99 (koordinat)
+					selY = 1;								//mengisi nilai selY dengan 0
+				} else if (b > 200 && b < 287) {			//mengecek kondisi jika b lebih dari 12 dan b kurang dari 99 (koordinat)
+					selY = 2;								//mengisi nilai selY dengan 0
+				} else if (b > 291 && b < 383) {			//mengecek kondisi jika b lebih dari 12 dan b kurang dari 99 (koordinat)
+					selY = 3;								//mengisi nilai selY dengan 0
+				} else if (b > 382 && b < 479) {			//mengecek kondisi jika b lebih dari 12 dan b kurang dari 99 (koordinat)
+					selY = 4; 								//mengisi nilai selY dengan 0
 				} else {
-					selY = -1;
+					selY = -1;								//mengisi nilai selY  dengan -1
 				}
-				if (selX != -1 && selY != -1) {
+				if (selX != -1 && selY != -1) {				//mengecek kondisi jika selX tidak sama dengan -1 dan selY tidak sama dengan -1
 
-					if (board[selX][selY] == 0) {
-						if (playerX) {
-							board[selX][selY] = 1;
-							playerX = false;
-						} else {
-							board[selX][selY] = 2;
-							playerX = true;
+					if (board[selX][selY] == 0) {			//melakukan nested if untuk mengecek board index selx dan selY sama dengan 0
+						if (playerX) {						//melakukan nested if untuk mengecek playerX apakah true
+							board[selX][selY] = 1;			//mengisi nilai board index selX dan selY dengan 1
+							playerX = false;				//mengisi variabel playerX dengan false
+						} else {							//mengecek selain kondisi di atas
+							board[selX][selY] = 2;			//mengisi nilai board index selX dan selY dengan 2
+							playerX = true;					//mengisi variabel playerX dengan true
 						}
-						checkWinner();
-						System.out.println(" CLICK= x:" + a + ",y: " + b + "; selX,selY: " + selX + "," + selY);
+						checkWinner();						//memanggil fungsi checkwinner
+						System.out.println(" CLICK= x:" + a + ",y: " + b + "; selX,selY: " + selX + "," + selY);	//memberikan output koordinat x dan Y pada terminal
 					}
-				} else {
-					System.out.println("invalid click");
+				} else {									//mengecek kondisi selain diatas
+					System.out.println("invalid click");	//mmeberikan output "invalid click" pada terminal
 				}
 			}
 		}
 
-		public void mouseReleased(MouseEvent event) {}
-		public void mouseEntered(MouseEvent event) {}
-		public void mouseExited(MouseEvent event) {}
-		public void mousePressed(MouseEvent event) {}
+		public void mouseReleased(MouseEvent event) {}		//Metode ini akan dipanggil ketika tombol mouse dilepas setelah sebelumnya ditekan
+		public void mouseEntered(MouseEvent event) {}		//Metode ini akan dipanggil saat kursor mouse memasuki batas area yang dipantau oleh XOListener.
+		public void mouseExited(MouseEvent event) {}		//Metode ini akan dipanggil saat kursor mouse meninggalkan batas area yang dipantau oleh XOListener. 
+		public void mousePressed(MouseEvent event) {}		//Metode ini akan dipanggil saat tombol mouse ditekan. 
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) { resetGame(); }
+	@Override													//meng-overide
+	public void actionPerformed(ActionEvent e) { resetGame(); }	//metode untuk mendeteksi ketika suatu tindakan (action) terjadi, permainan akan direset atau diinisialisasi kembali ke kondisi awal
 
 }
